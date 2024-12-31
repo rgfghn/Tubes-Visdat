@@ -44,18 +44,6 @@ st.subheader("Data Setelah Filter")
 st.write(filtered_data)
 
 if not filtered_data.empty:
-    # Scatter plot: Sleep Duration vs Sleep Efficiency
-    st.subheader("Visualisasi Durasi Tidur vs Efisiensi Tidur")
-    scatter_fig = px.scatter(
-        filtered_data,
-        x="sleep_efficiency",
-        y="sleep_duration",
-        color="gender",
-        title="Durasi Tidur vs Efisiensi Tidur",
-        labels={"sleep_efficiency": "Efisiensi Tidur","sleep_duration": "Durasi Tidur (Jam)", "gender": "Gender"},
-    )
-    st.plotly_chart(scatter_fig)
-
     # Line Chart: Age vs Sleep Efficiency
     st.subheader("Efisiensi Tidur Berdasarkan Usia")
     age_grouped = filtered_data.groupby("age")["sleep_efficiency"].mean().reset_index()
@@ -67,6 +55,18 @@ if not filtered_data.empty:
         labels={"age": "Usia", "sleep_efficiency": "Rata-Rata Efisiensi Tidur"},
     )
     st.plotly_chart(line_fig)
+    
+    # Scatter plot: Sleep Duration vs Sleep Efficiency
+    st.subheader("Visualisasi Durasi Tidur vs Efisiensi Tidur")
+    scatter_fig = px.scatter(
+        filtered_data,
+        x="sleep_efficiency",
+        y="sleep_duration",
+        color="gender",
+        title="Durasi Tidur vs Efisiensi Tidur",
+        labels={"sleep_efficiency": "Efisiensi Tidur","sleep_duration": "Durasi Tidur (Jam)", "gender": "Gender"},
+    )
+    st.plotly_chart(scatter_fig)
 
     # Scatter plot: Gender Comparison on Sleep Efficiency
     st.subheader("Efisiensi Tidur Berdasarkan Gender")
